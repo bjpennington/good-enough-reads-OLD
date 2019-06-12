@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     let apiQuery = 'https://www.googleapis.com/books/v1/volumes?q=';
     let queryParams =  '';
     let searchRequest = req.query.searchTerms.split(" ");
-    let newBook = {};
+    let booksList = {};
 
     // loop through array of search request words to concatenate query string
     for (let i = 0; i < searchRequest.length; i++) {
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     axios.get(apiQuery)
         .then(response => {
             newBook = response.data;
-            res.send(newBook);
+            res.send(booksList);
         })
         .catch(error => {
             console.log('Error on GoogleBooks api get:', error);
